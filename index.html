@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Лабораторна робота №7</title>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,600);
+    .snip1336 {
+      font-family: 'Roboto', Arial, sans-serif;
+      position: relative;
+      overflow: hidden;
+      margin: 10px;
+      min-width: 450px;
+      max-width: 550px;
+      width: 100%;
+      color: #ffffff;
+      text-align: left;
+      line-height: 1.4em;
+      background-color: #141414;
+      display: none;
+    }
+    .snip1336 * {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-transition: all 0.25s ease;
+      transition: all 0.25s ease;
+    }
+    .snip1336 img {
+      max-width: 100%;
+      width:100%;
+      vertical-align: top;
+      opacity: 0.85;
+    }
+    .snip1336 figcaption {
+      width: 100%;
+      background-color: #141414;
+      padding: 25px;
+      position: relative;
+    }
+    .snip1336 figcaption:before {
+      position: absolute;
+      content: '';
+      bottom: 100%;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 55px 0 0 400px;
+      border-color: transparent transparent transparent #141414;
+    }
+    .snip1336 figcaption a {
+      padding: 5px;
+      border: 1px solid #ffffff;
+      color: #ffffff;
+      font-size: 0.7em;
+      text-transform: uppercase;
+      margin: 10px 0;
+      display: inline-block;
+      opacity: 0.65;
+      width: 47%;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .snip1336 figcaption a:hover {
+      opacity: 1;
+    }
+    .snip1336 .profile {
+      border-radius: 50%;
+      position: absolute;
+      bottom: 100%;
+      left: 25px;
+      z-index: 1;
+      max-width: 90px;
+      opacity: 1;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+    .snip1336 .follow {
+      margin-right: 4%;
+      border-color: #2980b9;
+      color: #2980b9;
+    }
+    .snip1336 h2 {
+      margin: 0 0 5px;
+      font-weight: 300;
+    }
+    .snip1336 h3 {
+      margin: 0 0 5px;
+      font-weight: 300;
+    }
+    .snip1336 h4 {
+      margin: 0 0 5px;
+      font-weight: 300;
+    }
+    .snip1336 h5 {
+      margin: 0 0 5px;
+      font-weight: 300;
+    }
+    .snip1336 h2 span {
+      display: block;
+      font-size: 0.5em;
+      color: #2980b9;
+    }
+    .snip1336 p , .snip1336 ul li,.snip1336 ul li {
+      margin: 0 0 10px;
+      font-size: 0.8em;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+    .font {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #1d1919;
+      min-height: 100vh;
+      padding: 0;
+      margin: 0;
+      overflow-y: auto;
+    }
+  </style>
+
+  <script type="text/javascript">
+    const requestURL = 'https://randomuser.me/api/'
+
+    const showUser = (method, url, body = null) => {
+      return fetch(url).then(response => {
+        return response.json()
+      })
+    }
+
+    showUser('GET', requestURL)
+      .then(data =>{
+        document.querySelector("#fullName").innerHTML = data.results[0].name.first + ' ' + data.results[0].name.last
+        document.querySelector("#biography").innerHTML ='My name is ' + data.results[0].name.first + ' ' + data.results[0].name.last + '. I am ' + data.results[0].dob.age + ' and i love this world, almost everything. I live so far, so my timezone is:' + data.results[0].location.timezone.offset + '. I am musician and i love my job.'
+        document.querySelector("#picture").src = data.results[0].picture.large
+        document.querySelector("#location").innerHTML = 'Okay, I want to tell you where I live. So i live in ' + data.results[0].location.country + ' in my beautiful city ' + data.results[0].location.city + '.You must visit this city. My state is ' + data.results[0].location.state + '. Take my postcode: ' + data.results[0].location.postcode
+        document.querySelector("#fullStreet").innerHTML = 'My adress is: ' + data.results[0].location.street.name + ' ' + data.results[0].location.street.number
+        document.querySelector("#telephone").innerHTML = '1. ' + data.results[0].phone
+        document.querySelector("#email").innerHTML = '2. ' + data.results[0].email
+        document.querySelector("#figure").style.display = 'block'
+        document.querySelector("#loading").style.display = 'none'
+      })
+      .catch(err => console.log(err))
+  </script>
+</head>
+  <body class="font">
+  <div id="loading" style="color:white; font-size: 20px">Loading...</div>
+    <figure id='figure'  class="snip1336">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample87.jpg" alt="sample87" />x
+      <figcaption>
+        <img id="picture" alt="profile-sample4" class="profile" />
+        <h2 id="fullName" style="padding-bottom: 5px" ><span>Musician For Life</span></h2>
+        <p id="biography">I am an Award-winning web developer and instructor with 10+ years’ of well-rounded experience in LAMP development, object-oriented and user-centered design, seeks a position with a top technology firm.  </p>
+        <h3 style="padding-bottom: 5px">My adress:</h3>
+        <p id="location"></p>
+        <p id="fullStreet"></p>
+        <h4 style="padding-bottom: 5px">My contacts</h4>
+          <p id="telephone"></p>
+          <p id="email"></p>
+      </figcaption>
+    </figure>
+  </body>
+</html>
